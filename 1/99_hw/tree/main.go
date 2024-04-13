@@ -1,11 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"os"
-	"path/filepath"
-	"strings"
+)
+
+const (
+	branchChar = "├"
+	indentChar = "│"
+	lineChar   = "─"
+	lastBranch = "└"
 )
 
 func main() {
@@ -19,4 +23,8 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
+}
+
+func dirTree(out io.Writer, path string, printFiles bool) error {
+	return dirTreeRecursive(out, path, printFiles, 0)
 }
